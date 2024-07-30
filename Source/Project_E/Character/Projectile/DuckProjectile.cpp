@@ -71,18 +71,23 @@ void ADuckProjectile::InteractionKeyPressed(APJECharacterPlayer* Character)
 {
 	Super::InteractionKeyPressed(Character);
 
-	if (Character)
-	{
-		Character->SetHandItemCode(ItemCode);
+	if(GEngine) GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Emerald, FString::Printf(TEXT("Get Projectile")));
 
-		if (APJECharacterDuck* DuckCharacter = Cast<APJECharacterDuck>(Character))
-		{
-			DuckCharacter->Swallow();
-		}
-		else if (APJECharacterCat* CatCharacter = Cast<APJECharacterCat>(Character))
-		{
-			CatCharacter->Grab();
-		}
+	Character->SetHandItemCode(ItemCode);
+	
+	if(APJECharacterDuck* DuckCharacter = Cast<APJECharacterDuck>(Character))
+	{
+		DuckCharacter->Swallow();
 	}
+	else if(APJECharacterCat* CatCharacter = Cast<APJECharacterCat>(Character))
+	{
+		CatCharacter->Grab();
+	}
+	
+	NetMulticast_GetBall();
+}
+
+void ADuckProjectile::NetMulticast_GetBall_Implementation()
+{
 	Destroy();
 }

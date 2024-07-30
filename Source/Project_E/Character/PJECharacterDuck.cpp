@@ -62,6 +62,8 @@ void APJECharacterDuck::InitWidget()
 void APJECharacterDuck::BeginPlay()
 {
     Super::BeginPlay();
+
+    SetOwner(GetController());
 }
 
 void APJECharacterDuck::Tick(float DeltaTime)
@@ -81,6 +83,11 @@ void APJECharacterDuck::Tick(float DeltaTime)
 }
 
 void APJECharacterDuck::Swallow()
+{
+    Client_Swallow();
+}
+
+void APJECharacterDuck::Client_Swallow_Implementation()
 {
     if (Inventory)
     {

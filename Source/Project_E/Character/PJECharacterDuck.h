@@ -39,6 +39,9 @@ public:
 	void Swallow();
 
 protected:
+	UFUNCTION(Client, Reliable)
+	void Client_Swallow();
+	
 	void DropItem() override;
 	void Fire();
 	void ResetFire();
