@@ -14,9 +14,12 @@ class PROJECT_E_API UBTTask_SpawnShockWave : public UBTTaskNode
 {
 	GENERATED_BODY()
 	
+public:
+	UBTTask_SpawnShockWave();
+
 protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "ShockWave")
-	TObjectPtr<class APJEShockwave> ShockWaveClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ShockWave")
+	TSubclassOf<class APJEShockwave> ShockWaveClass;
 
 private:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
